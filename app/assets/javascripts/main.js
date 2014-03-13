@@ -12,7 +12,7 @@ $(document).ready(function(){
         // Xform data for the Datamap
         data.forEach(function(el){
             entry = {};
-            entry['fillKey'] = 'blue';
+            entry['fillKey'] = el.fill_color;
             entry['reincarcerated'] = el.returned_to_jail;
             entry['popAtRisk'] = el.pop_at_risk;
             entry['percent'] = el.percent;
@@ -34,11 +34,11 @@ $(document).ready(function(){
             element: document.getElementById('container'),
             fills: {
                 // defaultFill: 'rgba(23,48,210,0.9)' //any hex, color name or rgb/rgba value
-                HIGH: '#afafaf',
-                LOW: '#123456',
-                MEDIUM: 'blue',
-                UNKNOWN: 'rgb(0,0,0)',
-                defaultFill: 'green'
+                HIGH: 'red',
+                LOW: 'green',
+                MEDIUM: 'yellow',
+                UNKNOWN: 'orange',
+                defaultFill: 'gray'
             },
             scope: 'usa',
             data: data,
