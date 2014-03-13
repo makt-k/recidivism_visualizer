@@ -21,25 +21,63 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'dotenv-rails'
+gem 'time_difference'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :production do
+  gem 'rails_12factor'
+end
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+group :development do
+  # Add model attributes
+  gem 'annotate'
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+  # help to kill N+1 queries and unused eager loading
+  # https://github.com/flyerhzm/bullet. Needs config in development.rb
+  gem 'bullet'
+
+  # https://github.com/plentz/lol_dba
+  # list columns that should be indexed
+  gem 'lol_dba'
+
+  gem 'rails_best_practices', require: false
+
+  # Ruby/CLI: Automatic lossless reduction of all your images
+  gem 'smusher'
+end
+
+
+group :test do
+  gem 'faker'
+  gem 'chronic'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+  gem 'guard-rspec', require: false
+
+  gem 'pry-rails'
+  gem 'pry-nav'
+  gem 'pry-stack_explorer'
+
+  # Turn off verbose logging of asset requests
+  gem 'quiet_assets'
+
+  # see Railscast for better_error gem
+  # http://railscasts.com/episodes/402-better-errors-railspanel
+  # FOR sublime text 3 MUST INSTALL sublime-url-protocol-mac, http://goo.gl/8KX1lb
+  # http://goo.gl/8KX1lb
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  # Show a rails panel in Chrome. Requires a Chrome extension.
+  # https://github.com/dejan/rails_panel
+  gem 'meta_request'
+end
