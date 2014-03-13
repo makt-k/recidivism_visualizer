@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20140313054019) do
 
   create_table "state_recividisms", force: true do |t|
     t.string  "name"
-    t.decimal "pop_at_risk"
-    t.decimal "returned_to_jail"
+    t.integer "pop_at_risk"
+    t.integer "returned_to_jail"
     t.float   "percent"
   end
 
