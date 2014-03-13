@@ -2,10 +2,11 @@ $(document).ready(function(){
 
     var getDatamap,
         remoteData = {},
-        callback;
+        remoteSuccessHandler,
+        popupHandler;
 
-    // Function invoked after 'successfully' getting remote data
-    callback = function(data){
+    // Invoked after 'successfully' getting remote data
+    remoteSuccessHandler = function(data){
         var entry;
         console.log("success");
 
@@ -23,9 +24,19 @@ $(document).ready(function(){
         getDatamap(remoteData);
     };
 
-    // remote request to get data.
-    $.get('/state_recividisms/index.json')
-        .success(callback.bind(this));
+    // Triggered by a mouse over each state.
+    popupHandler = function(geo, data) {
+        // Markup for the popup
+        return ['<div class="hoverinfo"><strong> ',
+                geo.properties.name,
+                '<br> At Risk Population',
+                ': ' + data.popAtRisk,
+                '<br> Number Re-Incarcerated: ',
+                ': ' + data.reincarcerated,
+                '<br> Percent: ',
+                ': ' + data.percent,
+                '</strong></div>'].join('');
+    };
 
 
     // Draw the map
@@ -33,7 +44,6 @@ $(document).ready(function(){
         var map = new Datamap({
             element: document.getElementById('container'),
             fills: {
-                // defaultFill: 'rgba(23,48,210,0.9)' //any hex, color name or rgb/rgba value
                 HIGH: 'red',
                 LOW: 'green',
                 MEDIUM: 'yellow',
@@ -49,19 +59,13 @@ $(document).ready(function(){
                 // Shb an object with entries for each state, were keys are the 2 char state code.
                 // dataUrl: '/state_recividisms/index.json',
 
-                popupTemplate: function(geo, data) {
-                    // Markup for the popup
-                    return ['<div class="hoverinfo"><strong> ',
-                            geo.properties.name,
-                            '<br> At Risk Population',
-                            ': ' + data.popAtRisk,
-                            '<br> Number Re-Incarcerated: ',
-                            ': ' + data.reincarcerated,
-                            '<br> Percent: ',
-                            ': ' + data.percent,
-                            '</strong></div>'].join('');
-                }
+                popupTemplate: popupHandler
             }
         });
-    }
+    };
+
+    // remote request to get data.
+    $.get('/state_recividisms/index.json')
+        .success(remoteSuccessHandler.bind(this));
+
 });
