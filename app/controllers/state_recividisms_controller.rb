@@ -8,7 +8,7 @@ class StateRecividismsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json {render json: @state_recividisms }
+      format.json {render json: @state_recividisms, root: false }
     end
   end
 
