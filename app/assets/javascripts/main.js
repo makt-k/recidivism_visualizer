@@ -41,13 +41,14 @@ $(document).ready(function(){
 
     // Draw the map
     getDatamap = function(data){
+
         var map = new Datamap({
             element: document.getElementById('container'),
             fills: {
                 HIGH: 'red',
                 LOW: 'green',
                 MEDIUM: 'yellow',
-                UNKNOWN: 'orange',
+                UNKNOWN: 'gray',
                 defaultFill: 'gray'
             },
             scope: 'usa',
@@ -62,7 +63,12 @@ $(document).ready(function(){
                 popupTemplate: popupHandler
             }
         });
+
+        // Draw the map legend
+        map.legend({legendTitle: "Recivitism rate by State"});
     };
+
+
 
     // remote request to get data.
     $.get('/state_recividisms/index.json')
