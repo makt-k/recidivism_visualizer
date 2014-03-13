@@ -26,6 +26,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# For generating the JSON for the API
+gem 'active_model_serializers'
+
 gem 'dotenv-rails'
 gem 'time_difference'
 
