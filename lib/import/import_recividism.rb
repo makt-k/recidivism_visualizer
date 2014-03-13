@@ -1,10 +1,9 @@
 require 'csv'
-require '../states.rb'
+require_relative '../states.rb'
 
 puts STATE_NAMES;
 
 data =  CSV.read("../../data/ppus07st06.csv")
-puts "data class is #{data.class}"
 
 class StateRecividism
   attr_accessor :name, :pop_at_risk, :returned_to_jail, :percent
@@ -18,7 +17,7 @@ end
 
 data.each do |row|
   # CSV.foreach("../../data/ppus07st06.csv") do |row|
-  puts "State data = #{row}" if STATE_NAMES.include? row[1]
+  # puts "State data = #{row}" if STATE_NAMES.include? row[1]
   state_name = row[1]
 
   if STATE_NAMES.include?(state_name)
@@ -26,6 +25,5 @@ data.each do |row|
     puts state_reciv.inspect
     # puts "name: #{row[1]}, pop_at_risk: #{row[3]}, returned_to_jail: #{row[4]}, percentage: #{row[5]},  calc_percent = #{(row[4].to_f/row[3].to_f)*100}"
   end
-  # puts row.class.name.inspect
-  # puts row.inspect
+
 end
