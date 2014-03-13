@@ -29,6 +29,9 @@ end
 # For generating the JSON for the API
 gem 'active_model_serializers'
 
+gem 'd3_rails'
+gem 'topojson-rails'
+
 gem 'dotenv-rails'
 gem 'time_difference'
 
